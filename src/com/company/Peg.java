@@ -33,7 +33,6 @@ public class Peg {
                 return true;
             }
             else if (whichOne > discs[count-1]) {
-                System.out.println("Can't do that");
                 return false;
             }
             else {
