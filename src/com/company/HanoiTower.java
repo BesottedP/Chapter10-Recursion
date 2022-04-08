@@ -25,21 +25,16 @@ public class HanoiTower {
     private void moveTower(Peg startPeg, Peg endPeg, Peg extraPeg, int numtoMove)
     {
         if(numtoMove == 1){
-            System.out.println("if");
             startPeg.moveTopDisc(endPeg);
         }
         else{
-            System.out.println("else");
             moveTower(startPeg, extraPeg, endPeg, numtoMove -1);
-            System.out.println("moved1");
             startPeg.moveTopDisc(endPeg);
             moveTower(extraPeg,endPeg,startPeg,numtoMove-1);
-            System.out.println("moved2");
         }
     }
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        HanoiTower ht = new HanoiTower(3);
+        HanoiTower ht = new HanoiTower(5);
         ht.solveTower();
     }
 

@@ -11,6 +11,7 @@ public class Peg {
 
     public Peg(int peg, int num)
     {
+        numDiscs = num;
         pegNum = peg;
         count = 0;
         discs = new int[num];
@@ -44,8 +45,10 @@ public class Peg {
         // TODO add the disc with the given number to the top of the stack on the peg.
         // don't forget to make sure the move is value (no disc on top of a smaller one)
 
-    public int popDisc()
-    {
+    public int popDisc(){
+        if(count == 0){
+            return 0;
+        }
         int value = discs[count-1];
         discs[count-1] = 0;
         count--;
