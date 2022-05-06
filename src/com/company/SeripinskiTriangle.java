@@ -9,11 +9,10 @@ import javax.swing.JPanel;
 /**
  *  Square Rose, a recursive algorithm
  */
-
-public class SquareRose extends JPanel
+public class SeripinskiTriangle extends JPanel
 {
     private int levels;
-    public SquareRose(int lev)
+    public SeripinskiTriangle(int lev)
     {
         levels = lev;
     }
@@ -25,22 +24,24 @@ public class SquareRose extends JPanel
         int yCenter = getHeight() / 2;
 
 
-        int [] xcoord = {xCenter - 128, xCenter-128, xCenter + 128, xCenter + 128};
-        int [] ycoord = {yCenter-128, yCenter + 128, yCenter + 128, yCenter - 128};
+        int [] xcoord = {xCenter - 128, xCenter+128, xCenter};
+        int [] ycoord = {yCenter + 128, yCenter + 128, yCenter - 128};
 
-        g.setColor(Color.BLUE);
+        g.setColor(Color.BLACK);
+        g.fillPolygon(xcoord, ycoord, 3);
+        g.setColor(Color.WHITE);
+
         drawAndSplit(g, xcoord, ycoord, levels);
 
     }
 
     public int [] midpoints(int [] x)
     {
-        int [] m = new int [4];
+        int [] m = new int [3];
 
-        m[0] = (x[0] + x[1])/2;
-        m[1] = (x[1] + x[2])/2;
-        m[2] = (x[2] + x[3])/2;
-        m[3] = (x[3] + x[0])/2;
+        m[0] = (x[0]+x[1]/2);
+        m[1] = (x[1]+x[2]/2);
+        m[2] = (x[2]+x[0]/2);
 
         return m;
     }
@@ -51,8 +52,8 @@ public class SquareRose extends JPanel
         if(times != 0){
             int[] xCoords = midpoints(x);
             int[] yCoords = midpoints(y);
-            g.drawPolygon(x, y, 4);
             drawAndSplit(g, xCoords, yCoords, times-1);
+            g.fillPolygon(x, y, 3);
         }
     }
     public static void main(String[] args)
@@ -61,7 +62,7 @@ public class SquareRose extends JPanel
             JFrame window = new JFrame("Fractals");
             window.setBounds(200, 200, 500, 500);
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            SquareRose panel = new SquareRose(5);
+            SeripinskiTriangle panel = new SeripinskiTriangle(1);
             panel.setBackground(Color.WHITE);
             Container c = window.getContentPane();
             c.add(panel);
