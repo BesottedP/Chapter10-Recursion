@@ -71,7 +71,7 @@ public class SeripinskiTriangle extends JPanel
     }
     public static void main(String[] args)
     {
-            JFrame window = new JFrame("Fractals");
+            JFrame window = new JFrame("SeripinskiTriangle");
             window.setBounds(200, 200, 500, 500);
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             SeripinskiTriangle panel = new SeripinskiTriangle(5);
