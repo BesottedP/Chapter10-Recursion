@@ -57,7 +57,6 @@ public class SquareRose extends JPanel
     }
     public static void main(String[] args)
     {
-        for(int i = 1; i>0; i--){
             JFrame window = new JFrame("Fractals");
             window.setBounds(200, 200, 500, 500);
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,14 +65,5 @@ public class SquareRose extends JPanel
             Container c = window.getContentPane();
             c.add(panel);
             window.setVisible(true);
-        }
-//        JFrame window = new JFrame("Fractals");
-//        window.setBounds(200, 200, 500, 500);
-//        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        SquareRose panel = new SquareRose(5);
-//        panel.setBackground(Color.WHITE);
-//        Container c = window.getContentPane();
-//        c.add(panel);
-//        window.setVisible(true);
     }
 }

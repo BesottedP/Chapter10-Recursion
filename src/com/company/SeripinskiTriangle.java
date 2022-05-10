@@ -24,13 +24,10 @@ public class SeripinskiTriangle extends JPanel
         int yCenter = getHeight() / 2;
 
 
-        int [] xcoord = {xCenter - 128, xCenter+128, xCenter};
-        int [] ycoord = {yCenter + 128, yCenter + 128, yCenter - 128};
+        int [] xcoord = {xCenter, xCenter - 128, xCenter + 128};
+        int [] ycoord = {yCenter, yCenter + 128, yCenter + 128};
 
         g.setColor(Color.BLACK);
-        g.fillPolygon(xcoord, ycoord, 3);
-        g.setColor(Color.WHITE);
-
         drawAndSplit(g, xcoord, ycoord, levels);
 
     }
@@ -39,9 +36,9 @@ public class SeripinskiTriangle extends JPanel
     {
         int [] m = new int [3];
 
-        m[0] = (x[0]+x[1]/2);
-        m[1] = (x[1]+x[2]/2);
-        m[2] = (x[2]+x[0]/2);
+        m[0] = (x[0]+x[1])/2;
+        m[1] = (x[1]+x[2])/2;
+        m[2] = (x[2]+x[0])/2;
 
         return m;
     }
@@ -52,29 +49,35 @@ public class SeripinskiTriangle extends JPanel
         if(times != 0){
             int[] xCoords = midpoints(x);
             int[] yCoords = midpoints(y);
-            drawAndSplit(g, xCoords, yCoords, times-1);
-            g.fillPolygon(x, y, 3);
+
+            //Top Section
+            int[] recurseX = {x[0], xCoords[0], xCoords[2]};
+            int[] recurseY = {y[0], yCoords[0], yCoords[2]};
+            drawAndSplit(g, recurseX, recurseY, times-1);
+
+            //Bottom Left Section
+            int[] recurseXtwo = {x[1], xCoords[0], xCoords[1]};
+            int[] recurseYtwo = {y[1], yCoords[0], yCoords[1]};
+            drawAndSplit(g, recurseXtwo, recurseYtwo, times-1);
+
+            //Bottom Right Section
+            int[] recurseXthree = {xCoords[1], xCoords[2], x[2]};
+            int[] recurseYthree = {yCoords[1], yCoords[2], y[2]};
+            drawAndSplit(g, recurseXthree, recurseYthree, times-1);
         }
+
+        g.drawPolygon(x, y, 3);
+
     }
     public static void main(String[] args)
     {
-        for(int i = 1; i>0; i--){
             JFrame window = new JFrame("Fractals");
             window.setBounds(200, 200, 500, 500);
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            SeripinskiTriangle panel = new SeripinskiTriangle(1);
+            SeripinskiTriangle panel = new SeripinskiTriangle(5);
             panel.setBackground(Color.WHITE);
             Container c = window.getContentPane();
             c.add(panel);
             window.setVisible(true);
-        }
-//        JFrame window = new JFrame("Fractals");
-//        window.setBounds(200, 200, 500, 500);
-//        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        SquareRose panel = new SquareRose(5);
-//        panel.setBackground(Color.WHITE);
-//        Container c = window.getContentPane();
-//        c.add(panel);
-//        window.setVisible(true);
     }
 }
